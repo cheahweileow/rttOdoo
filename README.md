@@ -2,7 +2,7 @@
 
 ## Overview
 This repository contains an embedded face detection and real-time vision application developed for the **RT-Thread RTOS** running on the **Titan Board**[cite: 1]. The system captures frame data from a camera (using either the **Capture Engine Unit (CEU)** or **MIPI-CSI/VIN** hardware interfaces), processes image data using an onboard Neural Processing Unit (**Arm Ethos-U NPU**), renders live overlays to a **MIPI LCD**, and streams data over **Serial** or **Ethernet (HTTP)**[cite: 1]. It then connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software
-![How it works](documentation/picture/rtt to odoo.png)
+![How it works](<documentation/picture/rtt to odoo.png>)
 this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)
 ---
 
