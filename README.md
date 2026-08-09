@@ -5,6 +5,9 @@ This repository contains an embedded face detection and real-time vision applica
 this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)
 ---
 
+## User Manual
+user manual on how to use this project is available as e-learning on (Lingkail course website)[https://www.lingkail.my/slides/slide/connect-titanboard-to-odoo-81]
+
 ## 🌟 Key Features
 
 * **Multi-Interface Camera Abstraction**: Supports both **CEU** (Capture Engine Unit) and **MIPI-CSI/VIN** camera pipelines depending on macro configuration (`BSP_USING_CEU_CAMERA`)[cite: 1].
