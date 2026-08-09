@@ -160,4 +160,7 @@ locate the r_glcdc_cfg.h file and modify
    cam_face_upload_loop 3
    ```[cite: 1]
 ### Deploying (python file)
-this python file is copied onto a pc that is connected to titan board
+these python files are copied onto a pc that is connected to titan board
+the files are located at ![Documentation](<documentation/>)
+titan_odoo_bridge -> for sending image and data to Odoo ERP
+titan_qwen_bridge -> for sending query to qwen via api
