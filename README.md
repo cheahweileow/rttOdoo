@@ -21,19 +21,19 @@ graph TD
     Camera -->|Physical Connection| Titan
     Titan -->|Internet / HTTP/MQTT| Odoo
     Odoo -->|API Call| Qwen
-    Qwen --- Alibaba
+    Qwen --> Alibaba
 
     %% Layout grouping
-    subgraph Edge Layer
+    subgraph EdgeLayer["Edge Layer"]
         Camera
         Titan
-    </subgraph>
+    end
 
-    subgraph Server / ERP Layer
+    subgraph ServerLayer["Server/ERP Layer"]
         Odoo
-    </subgraph>
+    end
 
-    subgraph AI Cloud Layer
+    subgraph AILayer["AI Cloud Layer"]
         Alibaba
         Qwen
     end
