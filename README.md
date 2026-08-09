@@ -2,3 +2,40 @@
 this project connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software
 this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)
 
+# System Architecture
+```mermaid
+graph TD
+    %% Define Styles
+    classDef hardware fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef software fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef cloud fill:#f96,stroke:#333,stroke-width:2px;
+
+    %% Nodes Declaration
+    Camera[Camera Module]:::hardware
+    Titan[RT-Thread Titan Board]:::hardware
+    Odoo[Custom Built Odoo App]:::software
+    Qwen[Qwen LLM via API]:::cloud
+    Alibaba[Alibaba Cloud Platform]:::cloud
+
+    %% Connections
+    Camera -->|Physical Connection| Titan
+    Titan -->|Internet / HTTP/MQTT| Odoo
+    Odoo -->|API Call| Qwen
+    Qwen --- Alibaba
+
+    %% Layout grouping
+    subgraph Edge Layer
+        Camera
+        Titan
+    </subgraph>
+
+    subgraph Server / ERP Layer
+        Odoo
+    </subgraph>
+
+    subgraph AI Cloud Layer
+        Alibaba
+        Qwen
+    end
+```
+
