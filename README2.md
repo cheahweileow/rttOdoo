@@ -1,6 +1,6 @@
 # MIPI CSI Camera Usage Instructions
 
-**English**|[**Chinese**](README_zh.md)
+**English**|[**Chinese**](README2_zh.md)
 
 ## Introduction
 
