@@ -1,7 +1,8 @@
 # Real-Time Face Detection with Odoo ERP Connectivity using (Titan Board)[cite: 1]
 
 ## Overview
-<small>This repository contains an embedded face detection and real-time vision application developed for the **RT-Thread RTOS** running on the **Titan Board**[cite: 1]. The system captures frame data from a camera (using either the **Capture Engine Unit (CEU)** or **MIPI-CSI/VIN** hardware interfaces), processes image data using an onboard Neural Processing Unit (**Arm Ethos-U NPU**), renders live overlays to a **MIPI LCD**, and streams data over **Serial** or **Ethernet (HTTP)**[cite: 1]. It then connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software</small>
+<small>This project use AI to detect how many visitor is visiting an exhibtion booth / machine in factory and report its status to a connected enterprise resource planning (ERP) software. it then prompt the user to check an idiom / poem associated with the detected number of face. 
+This repository contains an embedded face detection and real-time vision application developed for the **RT-Thread RTOS** running on the **Titan Board**[cite: 1]. The system captures frame data from a camera (using either the **Capture Engine Unit (CEU)** or **MIPI-CSI/VIN** hardware interfaces), processes image data using an onboard Neural Processing Unit (**Arm Ethos-U NPU**), renders live overlays to a **MIPI LCD**, and streams data over **Serial** or **Ethernet (HTTP)**[cite: 1]. It then connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software</small>
 ![How it works](<documentation/picture/rtt to odoo.png>)
 <sub>this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)</sub>
 ---
