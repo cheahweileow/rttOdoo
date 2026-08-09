@@ -1,6 +1,6 @@
 # MIPI CSI 摄像头使用说明
 
-**中文**|[**English**](README.md)
+**中文**|[**English**](README2.md)
 
 ## 简介
 
