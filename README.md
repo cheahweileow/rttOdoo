@@ -6,7 +6,7 @@ this project is adapted from built in example with its original **Documentation*
 ---
 
 ## User Manual
-user manual on how to use this project is available as e-learning on (Lingkail course website)[https://www.lingkail.my/slides/slide/connect-titanboard-to-odoo-81]
+user manual on how to use this project is available as e-learning on [https://www.lingkail.my/slides/slide/connect-titanboard-to-odoo-81](Lingkail course website)
 
 ## 🌟 Key Features
 
