@@ -6,7 +6,7 @@ this project is adapted from built in example with its original **Documentation*
 ```mermaid
 graph TD
     %% Define Styles
-    classDef hardware fill:#f8f,stroke:#333,stroke-width:2px;
+    classDef hardware fill:#006400,stroke:#333,stroke-width:2px;
     classDef software fill:#b7f,stroke:#333,stroke-width:2px;
     classDef cloud fill:#f96,stroke:#333,stroke-width:2px;
 
