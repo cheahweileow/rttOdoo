@@ -126,6 +126,20 @@ The application exposes a set of commands via the RT-Thread shell (`msh`)[cite: 
 
 ## 🚀 Getting Started
 
+### Prerequisite
+locate the r_glcdc_cfg.h file and modify 
+
+/* Enable DSI function handling */
+#if (RA_NOT_DEFINED != 1)
+#define GLCDC_CFG_USING_DSI
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+
+### Deploying (Titan Board)
+
 1. Boot up the Titan Board with RT-Thread compiled firmware[cite: 1].
 2. Open serial terminal and execute:
    ```bash
@@ -140,3 +154,5 @@ The application exposes a set of commands via the RT-Thread shell (`msh`)[cite: 
    cam_upload_set 192.168.1.100 5000
    cam_face_upload_loop 3
    ```[cite: 1]
+### Deploying (python file)
+this python file is copied onto a pc that is connected to titan board
