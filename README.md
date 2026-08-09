@@ -14,12 +14,12 @@ graph TD
     Camera[Camera Module]:::hardware
     Titan[RT-Thread Titan Board]:::hardware
     Odoo[Custom Built Odoo App]:::software
-    Qwen[Qwen LLM via API]:::cloud
+    Qwen[Qwen LLM]:::cloud
     Alibaba[Alibaba Cloud Platform]:::cloud
 
     %% Connections
     Camera -->|Physical Connection| Titan
-    Titan -->|Internet / HTTP/MQTT| Odoo
+    Titan -->|Internet / HTTP| Odoo
     Odoo -->|API Call| Qwen
     Qwen --> Alibaba
 
