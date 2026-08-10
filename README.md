@@ -1,9 +1,9 @@
 # Real-Time Face Detection with Odoo ERP Connectivity using (Titan Board)[cite: 1]
 
 ## Overview
-This repository contains an embedded face detection and real-time vision application developed for the **RT-Thread RTOS** running on the **Titan Board**[cite: 1]. The system captures frame data from a camera (using either the **Capture Engine Unit (CEU)** or **MIPI-CSI/VIN** hardware interfaces), processes image data using an onboard Neural Processing Unit (**Arm Ethos-U NPU**), renders live overlays to a **MIPI LCD**, and streams data over **Serial** or **Ethernet (HTTP)**[cite: 1]. It then connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software
+<small>This project use AI to detect how many visitor is visiting an exhibtion booth / machine in factory and report its status to a connected enterprise resource planning (ERP) software. it then prompt the user to check an idiom / poem associated with the detected number of face. This repository contains an embedded face detection and real-time vision application developed for the **RT-Thread RTOS** running on the **Titan Board**[cite: 1]. The system captures frame data from a camera (using either the **Capture Engine Unit (CEU)** or **MIPI-CSI/VIN** hardware interfaces), processes image data using an onboard Neural Processing Unit (**Arm Ethos-U NPU**), renders live overlays to a **MIPI LCD**, and streams data over **Serial** or **Ethernet (HTTP)**[cite: 1]. It then connect RT-Thread board to Odoo, an enterprise resource planning (ERP) software</small>
 ![How it works](<documentation/picture/rtt to odoo.png>)
-this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)
+<sub>this project is adapted from built in example with its original **Documentation**|[**English**](README2.md)</sub>
 ---
 
 ## User Manual
@@ -160,4 +160,7 @@ locate the r_glcdc_cfg.h file and modify
    cam_face_upload_loop 3
    ```[cite: 1]
 ### Deploying (python file)
-this python file is copied onto a pc that is connected to titan board
+these python files are copied onto a pc that is connected to titan board
+the files are located at ![Documentation](<documentation/>)
+titan_odoo_bridge -> for sending image and data to Odoo ERP
+titan_qwen_bridge -> for sending query to qwen via api
