@@ -151,7 +151,23 @@ static rt_bool_t camera_frame_mutex_ready = RT_FALSE;
 #define SERIAL_FRAME_CHUNK_BYTES       (1024)
 #define HTTP_UPLOAD_CHUNK_BYTES        (1460)
 
-static char upload_host[64] = "192.168.1.197";
+#ifndef TITAN_AUTO_START_ENABLE
+#define TITAN_AUTO_START_ENABLE        1
+#endif
+
+#ifndef TITAN_AUTO_LCD_AI_FPS_TEXT
+#define TITAN_AUTO_LCD_AI_FPS_TEXT     "5"
+#endif
+
+#ifndef TITAN_AUTO_UPLOAD_INTERVAL_TEXT
+#define TITAN_AUTO_UPLOAD_INTERVAL_TEXT "5"
+#endif
+
+#ifndef TITAN_AUTO_START_DELAY_MS
+#define TITAN_AUTO_START_DELAY_MS      3000
+#endif
+
+static char upload_host[64] = "192.168.101.123";
 static uint32_t upload_port = 5000;
 
 #if defined(BSP_USING_SDCARD_FATFS)
@@ -1536,7 +1552,7 @@ static int cam_upload_set(int argc, char **argv)
 
     return 0;
 }
-MSH_CMD_EXPORT(cam_upload_set, set Python API upload host: cam_upload_set 192.168.1.100 5000);
+MSH_CMD_EXPORT(cam_upload_set, set Python API upload host: cam_upload_set 192.168.101.123 5000);
 
 static void cam_face_upload_loop_thread_entry(void *parameter)
 {
@@ -1859,6 +1875,66 @@ static int cam_hw_status(int argc, char **argv)
 MSH_CMD_EXPORT(cam_hw_status, dump VIN and MIPI CSI hardware registers);
 #endif
 
+static void titan_auto_start_thread_entry(void *parameter)
+{
+    uint32_t timeout_ms = 15000;
+    uint32_t elapsed_ms = 0;
+    char *lcd_ai_argv[] = {"cam_lcd_ai_live", TITAN_AUTO_LCD_AI_FPS_TEXT};
+    char *upload_argv[] = {"cam_face_upload_loop", TITAN_AUTO_UPLOAD_INTERVAL_TEXT};
+
+    RT_UNUSED(parameter);
+
+    rt_kprintf("Titan auto-start waiting %d ms before camera start...\n", TITAN_AUTO_START_DELAY_MS);
+    rt_thread_mdelay(TITAN_AUTO_START_DELAY_MS);
+
+    rt_kprintf("Titan auto-start: starting camera/VIN\n");
+    cam_start(0, RT_NULL);
+
+    while ((!camera_started || !vin_started) && (elapsed_ms < timeout_ms))
+    {
+        rt_thread_mdelay(200);
+        elapsed_ms += 200;
+    }
+
+    if (!camera_started || !vin_started)
+    {
+        rt_kprintf("Titan auto-start: camera/VIN not ready after %d ms, stop auto sequence\n", timeout_ms);
+        return;
+    }
+
+    rt_kprintf("Titan auto-start: camera ready, starting LCD AI live\n");
+    cam_lcd_ai_live(2, lcd_ai_argv);
+
+    rt_kprintf("Titan auto-start: starting face upload loop\n");
+    cam_face_upload_loop(2, upload_argv);
+}
+
+static int cam_auto_start(int argc, char **argv)
+{
+    rt_thread_t tid;
+
+    RT_UNUSED(argc);
+    RT_UNUSED(argv);
+
+    tid = rt_thread_create("auto_cam",
+                           titan_auto_start_thread_entry,
+                           RT_NULL,
+                           4096,
+                           28,
+                           10);
+    if (tid == RT_NULL)
+    {
+        rt_kprintf("create Titan auto-start thread failed\n");
+        return -1;
+    }
+
+    rt_thread_startup(tid);
+    rt_kprintf("Titan auto-start thread created\n");
+
+    return 0;
+}
+MSH_CMD_EXPORT(cam_auto_start, start camera LCD AI live and face upload loop);
+
 void hal_entry(void)
 {
     if (!camera_frame_mutex_ready)
@@ -1883,5 +1959,11 @@ void hal_entry(void)
 #else
     rt_kprintf ("Then wait for VIN capture started\n");
     rt_kprintf ("Then: cam_capture\n");
+#endif
+#if TITAN_AUTO_START_ENABLE
+    rt_kprintf ("Auto: camera + LCD AI + face upload will start after boot\n");
+    cam_auto_start(0, RT_NULL);
+#else
+    rt_kprintf ("Auto: disabled. Type cam_auto_start to start all\n");
 #endif
 }
